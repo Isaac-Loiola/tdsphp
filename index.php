@@ -74,4 +74,4 @@ echo "$a com incremento de 1 ".$a++."<br>"; # incrementação
 echo "$b com decremento de 1 ".$b--."<br>"; # decremento
 
 echo" b - $b / a - $a <br>";
-?>
+?>""
