@@ -57,6 +57,18 @@ if(isset($_REQUEST['idade'])){
 ?>
 <br>
 
-----------------------------
+------------Validação--------------
 
 <br>
+<form method="post">
+    Usuário: <input type="text" name="usuario">
+    <input type="submit" value="Enviar">
+</form>
+<?php 
+    if(!empty($_POST['usuario'])){
+        echo "Seja bem vindo ". $_POST['usuario'];
+    }
+    else{
+        echo "Por favor, digite o seu usuário!";
+    }
+?>
