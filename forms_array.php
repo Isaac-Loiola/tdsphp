@@ -60,15 +60,41 @@ if(isset($_REQUEST['idade'])){
 ------------Validação--------------
 
 <br>
-<form method="post">
+<form action="dados.php" method="post">
     Usuário: <input type="text" name="usuario">
     <input type="submit" value="Enviar">
 </form>
-<?php 
-    if(!empty($_POST['usuario'])){
-        echo "Seja bem vindo ". $_POST['usuario'];
+
+
+<br>
+-----------------------------------
+<br>
+
+ <?php 
+    $endereco = "https://republicavirtual.com.br/web_cep.php?cep=08225380&formato=json";
+    print_r($endereco);
+ ?>
+
+ <br>
+ ----------------------------------------
+ <br>
+
+ <form action="" method="post">
+    Selecione seus cursos: <br>
+    <input type="checkbox" name="cursos[]" value="PHP">PHP<br>
+    <input type="checkbox" name="cursos[]" value="C#">C#<br>
+    <input type="checkbox" name="cursos[]" value="HTML">HTML<br>
+    <input type="checkbox" name="cursos[]" value="CSS">CSS<br>
+    <input type="checkbox" name="cursos[]" value="Boostrap">Boostrap<br>
+    <input type="checkbox" name="cursos[]" value="Linux">Linux<br>
+
+    <input type="submit" value="Enviar">
+ </form>
+
+ <?php 
+ if(isset($_POST['cursos'])){
+    foreach($_POST['cursos'] as $curso){
+        echo "Curso escolhido: ". $curso."<br>";
     }
-    else{
-        echo "Por favor, digite o seu usuário!";
-    }
-?>
+ }
+ ?>
