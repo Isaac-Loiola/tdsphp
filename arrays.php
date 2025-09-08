@@ -30,10 +30,22 @@ $formDados = [];
 if($_POST){
     $formDados['nome'] = $_POST['nome'];
     $formDados['telefone '] = $_POST['telefone'];
+    setcookie("cadastros", json_encode($formDados), time() + 3600);
     print_r($formDados);
 }
+if(!isset($cadastros)){
+    $cadastros = [];
+}
+else{
+    $cadastros = json_decode($_COOKIE['formdados'], true);
+}
+foreach($cadastros as $key => $cad){
+    echo "Nome: {$cad['nome']} <br>";
+    echo "Telefone: {$cad['telefone']} <br>";
 
+}
 ?>
+
 <form method="post">
     Nome: <input type="text" name="nome"> <br>
     Telefone: <input type="tel" name="telefone"> <br>
