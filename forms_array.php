@@ -12,6 +12,8 @@
 
 <!-- POST o dado é enviado dentro do corpo da requisição -->
 
+<!-- REQUEST recupara o dado sendo tanto POST ou GET -->
+
 <?php 
 // Manipulação de Strings
 if(isset($_GET['nome']) and isset($_GET['senha'])){
@@ -36,6 +38,25 @@ if(isset($_GET['nome']) and isset($_GET['senha'])){
 
 if(isset($_POST['email'])){
     echo "Seu email é: ". $_POST['email'];
-    echo "O Token é:". $_POST['token'];
+    echo "<br>O Token é:". $_POST['token'];
 }
 ?>
+<br>
+------------------------------------
+<br>
+<form method="post">
+    Idade: <input type="number" name="idade" id="">
+    <input type="submit" value="Enviar">
+</form>
+
+<?php 
+if(isset($_REQUEST['idade'])){
+    echo "Idade recebida: ".$_REQUEST['idade'];
+}
+
+?>
+<br>
+
+----------------------------
+
+<br>
