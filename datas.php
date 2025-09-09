@@ -13,4 +13,11 @@
 
     $prazo->modify("+$diasEntrega days");
     echo "Prazo de entrega: ".$prazo->format("d:m:y");
+
+    // diferença entre datas
+    $dataVencimento = new DateTime('2025-09-01');
+    $dataPagamento = new DateTime('2025-09-15');
+    $diasAtraso = $dataVencimento->diff($dataPagamento);
+
+    echo "<br>".$diasAtraso->days ." dias de atraso";
 ?>
