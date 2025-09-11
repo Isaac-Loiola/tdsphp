@@ -14,6 +14,13 @@ require_once "db.php";
             ':nome' => $nome,
             ':preco' => $preco
         ]);
-
     }
+
+    function listarProdutos () : array{
+        $pdo = getConnection();
+        $cmd = $pdo->query("select * from produtos order by nome desc");
+        return $cmd->fetch(); 
+    }
+
+  
 ?>
