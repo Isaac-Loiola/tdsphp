@@ -22,5 +22,13 @@ require_once "db.php";
         return $cmd->fetch(); 
     }
 
-  
+    function buscarPorId (int $id) : ?array{
+        $pdo = getConnection();
+        $cmd = $pdo -> prepare("select * from produtos where id = :id");
+        $cmd->execute([
+            ':nome' => $id
+        ]);
+        $produto = $cmd->fetch();
+        return $produto?:null;
+    }
 ?>
