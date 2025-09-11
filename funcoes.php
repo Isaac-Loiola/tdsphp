@@ -31,4 +31,14 @@ require_once "db.php";
         $produto = $cmd->fetch();
         return $produto?:null;
     }
+
+    function editarProduto (int $id, string $nome, float $preco) : bool {
+        $pdo = getConnection();
+        $cmd = $pdo->prepare("update produtos set nome = :nome, preco = :preco where id = :id");
+        return $cmd->execute([
+            ':nome' => $nome,
+            ':preco' => $preco,
+            ':id' => $id
+        ]);
+    }
 ?>
