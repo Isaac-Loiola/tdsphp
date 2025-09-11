@@ -1,16 +1,19 @@
 <?php 
-    function getConnection() : PDO{ // retorna um objeto PDO
-        static $pdo;
-        if( $pdo === null){
-            $pdo = new PDO(
-                "mysql:host=10.91.47.77;dbname=modelophp_db", 
-                "root", 
-                "123",
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-            );
+require_once "db.php";
 
-        }
-        return $pdo;
+    function formatarPreco(float $valor) : string{
+        return "R$ ". number_format($valor, 2, ",", ".");
+    }
+
+    // Insere um produto no banco de dados!
+    function InserirProduto(string $nome, float $preco) : bool{
+        $pdo = getConnection();
+        $cmd = $pdo->prepare("insert into produtos (nome, preco, datacad)
+        values (:nome, :preco, default");
+        return $cmd->execute([
+            ':nome' => $nome,
+            ':preco' => $preco
+        ]);
+
     }
 ?>
