@@ -41,4 +41,12 @@ require_once "db.php";
             ':id' => $id
         ]);
     }
+
+    function excluirProduto (int $id) : bool{
+        $pdo = getConnection();
+        $cmd = $pdo->prepare("delete from produtos where id = :id");
+        return $cmd->execute([
+            ':id' => $id
+        ]);
+    }
 ?>
