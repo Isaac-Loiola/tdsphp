@@ -19,7 +19,7 @@ require_once "db.php";
     function listarProdutos () : array{
         $pdo = getConnection();
         $cmd = $pdo->query("select * from produtos order by nome desc");
-        return $cmd->fetchAll(); 
+        return $cmd->fetch(); 
     }
 
     function buscarPorId (int $id) : ?array{
