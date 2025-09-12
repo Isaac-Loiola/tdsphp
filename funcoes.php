@@ -9,7 +9,7 @@ require_once "db.php";
     function InserirProduto(string $nome, float $preco) : bool{
         $pdo = getConnection();
         $cmd = $pdo->prepare("insert into produtos (nome, preco, datacad)
-        values (:nome, :preco, default");
+        values (:nome, :preco, default)");
         return $cmd->execute([
             ':nome' => $nome,
             ':preco' => $preco
@@ -19,14 +19,14 @@ require_once "db.php";
     function listarProdutos () : array{
         $pdo = getConnection();
         $cmd = $pdo->query("select * from produtos order by nome desc");
-        return $cmd->fetch(); 
+        return $cmd->fetchAll(); 
     }
 
     function buscarPorId (int $id) : ?array{
         $pdo = getConnection();
         $cmd = $pdo -> prepare("select * from produtos where id = :id");
         $cmd->execute([
-            ':nome' => $id
+            ':id' => $id
         ]);
         $produto = $cmd->fetch();
         return $produto?:null;

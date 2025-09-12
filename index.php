@@ -1,77 +1,63 @@
 <?php
+    require_once "funcoes.php";
 
-// Comentário de linha
+    // Ações do cadastro
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if(isset($_POST['inserir'])){
+            (InserirProduto($_POST['nome'], (float)$_POST['preco']));
 
-/*
-    Comentário de bloco
-*/
+        }
+        if(isset($_POST['editar'])){
+            editarProduto((int)$_POST['id'], $_POST['nome'], (float)$_POST['preco']);
+        }
 
-# Comentário de linha
+    }
+    if(isset($_GET['excluir'])){
+        excluirProduto((int)$_GET['excluir']);
+    }
 
-/*
-    PHP é um linguagem de programação volrada principalmente para dev WEB.
-    Server-side.
-    Funciona em conjunto com HTML, CSS, JS e integra com Banco de dados.
-    Nasceu em 1994.
-    Estrutura pra funcionar ( Server Linux, WAMPP, XAMPP, Laragon) - Ambiente de desenvolvimento.
-    Orientado a expressão.
+    $produtos = listarProdutos();
 
-*/
-
-// echo "Olá mundo!"; 
-
-// Declaração de variáveis no PHP
-$A123;
-$x = 1.6; // = (atribuição) / == (comparação) / === (comparação absoluta tipo e valor)
-
-$X = 2; // PHP é case sensitive (faz diferenciação entre maiúsculo e minúsculo)
-
-$escola = "Senac";
-$numero = 8266;
-$valorOnibus = 5;
-$portaoAberto = true;
-
-echo "Estudo no $escola em $numero da Av.Itaquera,
-e pago $valorOnibus na passagem de onibus.
-Aberto = $portaoAberto";
-
-
-// variáveis globais no PHP
-// echo $_SERVER;
-
-// print_r($_SERVER);
-
-
-// constantes no PHP
-echo "<br>";
-
-define("TESTE", "conteúdo de um constante");
-define("DB_NAME", "ComercialDB01");
-define("DB_USER", "root");
-define("DB_PASSWD", "123 ");
-define("DB_SERVER", "10.91.47.77");
-
-echo DB_NAME." - ".DB_USER;
-
-
-// Operadores no PHP
-echo "<br>";
-$a = 2;
-$b = 10;
-
-echo -$a."<br>";
-echo -$b."<br>";
-echo "$a + $b = ".$a+$b."<br>"; # adição
-echo "$a - $b = ".$a-$b."<br>"; # subtração
-echo "$a / $b = ".$a/$b."<br>"; # divisão
-echo "$a % $b = ".$a%$b."<br>"; # resto da divisão (mod)
-echo "$a ** $b = ".$a**$b."<br>"; # exponenciação (Elevado)
-
-echo "$a com incremento de 1 ".$a++."<br>"; # incrementação
-echo "$b com decremento de 1 ".--$b."<br>"; # decremento
-
-echo "$a com incremento de 1 ".$a++."<br>"; # incrementação
-echo "$b com decremento de 1 ".$b--."<br>"; # decremento
-
-echo" b - $b / a - $a <br>";
-?>""
+?>
+ 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD de Produtos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+ 
+    <h2>Cadastro de Produtos</h2>
+    <form method="POST" class="mb-3">
+        <input type="text" name="nome" placeholder="Nome do produto" required class="form-control mb-2">
+        <input type="number" step="0.01" name="preco" placeholder="Preço" required class="form-control mb-2">
+        <button type="submit" name="inserir" class="btn btn-success">Inserir</button>
+    </form>
+ 
+    <h3>Lista de Produtos</h3>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Data Cad</th>
+            <th>Ações</th>
+        </tr>
+        <?php foreach($produtos as $produto) : ?>
+            <tr>
+                <td><?= $produto['id']?></td>
+                <td><?= htmlspecialchars($produto['nome'])?></td>
+                <td><?= formatarPreco($produto['preco'])?></td>
+                <td><?= date("d/m/Y H:i", strtotime($produto['datacad']))?></td>
+                <td class="d-flex gap-3">
+                    <a href="editar.php?id=<?= $produto['id']?>" class="btn btn-warning">Editar</a>    
+                    <a href="?excluir=<?= $produto['id']?>" class="btn btn-danger btn-sm" onclick="return confirm('excluir produto?')">Excluir</a>
+                </td>
+            </tr>
+            <?php endforeach;?> 
+    </table>
+ 
+</body>
+</html>
