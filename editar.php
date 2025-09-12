@@ -13,7 +13,7 @@ require_once("funcoes.php");
         exit();
     }
 
-    if($_server['REQUEST_METHOD'] === 'POST'){
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
         editarProduto($id, $_POST['nome'], (float)$_POST['preco']);
         header('location: index.php');
         exit;
@@ -32,7 +32,7 @@ require_once("funcoes.php");
     <h2>Editar Produto</h2>
     <form method="POST">
         <input type="text" name="nome" value="<?= htmlspecialchars($produto['nome'])?>" required class="form-control mb-2">
-        <input type="number" step="0.01" name="preco" value="" required class="form-control mb-2">
+        <input type="number" step="0.01" name="preco" value="<?=$produto['preco']?>" required class="form-control mb-2">
         <button type="submit" class="btn btn-primary">Salvar</button>
         <a href="index.php" class="btn btn-secondary">Cancelar</a>
     </form>
