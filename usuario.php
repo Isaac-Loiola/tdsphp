@@ -42,7 +42,7 @@ class Usuario{
     }
 
     // inserindo usuario
-    public function inserir(){
+    public function inserir() : bool {
         $sql = "insert into usuarios (nome, email, datacad)
         values (:nome, :email, default)";
 
@@ -57,6 +57,13 @@ class Usuario{
         }
         return false;
     }
+
+    public function listar() : array{
+        $cmd = $this->pdo->query("select * from usuarios order by id desc");
+        return $cmd->fetchAll();
+    }
+
+    
 }
 
 
