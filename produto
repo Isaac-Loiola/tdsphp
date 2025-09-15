@@ -1,0 +1,10 @@
+<?php 
+include_once("db.php");
+
+class Produto{
+    private $id;
+    private $nome;
+    private $preco;
+    private $datacad;
+}
+?>
