@@ -13,7 +13,7 @@ class Usuario{
     private $pdo;
 
     public function __construct(){
-        $pdo = getConnection();
+        $this->pdo = getConnection();
     }
 
     //Getters e Setters - Propriedades ou métodos de acesso!
@@ -39,6 +39,23 @@ class Usuario{
 
     public function getDataCad(){
         return $this->datacad;
+    }
+
+    // inserindo usuario
+    public function inserir(){
+        $sql = "insert into usuarios (nome, email, datacad)
+        values (:nome, :email, default)";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":email", $this->email);
+        $cmd->execute();
+
+        if($cmd->execute()){
+            $this->id = $this->pdo->lastInsertId();
+            return true;
+        }
+        return false;
     }
 }
 
