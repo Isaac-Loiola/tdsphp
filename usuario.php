@@ -83,6 +83,28 @@ class Usuario{
         }
         return false;
     }
+
+    public function atualizar(){
+        if(!$this->id) return false;
+
+        $sql = "update usuarios set nome = :nome, email = :email where id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":email", $this->email);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        return $cmd->execute();
+    }
+
+    public function excluir(){
+        if(!$this->id) return false;
+
+        $sql = "delete from usuarios where id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        return $cmd->execute();
+    }
 }
 
 

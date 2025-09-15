@@ -3,16 +3,16 @@ include_once "usuario.php";
 
     $user = new Usuario();
 
-    echo "Inserindo usuário: ";
+    // echo "Inserindo usuário: ";
 
-    $user->setNome("Joana Machado");
-    $user->setEmail("joanamacha@gmail.com");
+    // $user->setNome("Joana Machado");
+    // $user->setEmail("joanamacha@gmail.com");
 
-    if($user->inserir()){
-        echo "Usuário ".$user->getNome() ."inserido com sucesso!";
+    if($user->obterPorId($_GET['id'])){
+        echo "Usuário ".$user->getNome() ." localizado";
     }
     else{
-        echo "Usuario não cadastrado!";
+        echo "Usuario não localizado!";
     }
     
 ?>
