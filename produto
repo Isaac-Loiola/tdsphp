@@ -6,5 +6,36 @@ class Produto{
     private $nome;
     private $preco;
     private $datacad;
+
+    private $pdo;
+
+    // Getters e Setters
+    public function __construct(){
+        $this->pdo = getConnection();
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setNome($nome){
+        $this->nome = $nome;
+    }
+
+    public function getNome(){
+        return $this->nome;
+    }
+
+    public function setPreco($preco){
+        $this->preco = $preco;
+    }
+
+    public function getPreco(){
+        return $this->preco;
+    }
+
+    public function getDataCad(){
+        return $this->datacad;
+    }
 }
 ?>
