@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use function PHPSTORM_META\sql_injection_subst;
+
 include_once("db.php");
 
 class Produto{
@@ -39,7 +42,7 @@ class Produto{
     }
 
     // Função para adicionar um produto ao banco de dados.
-    public function inserir($nome, $preco):bool{
+    public function inserir() : bool{
         $sql = "insert into produtos (nome, preco, datacad)
         values (:nome, :preco, default)";
 
@@ -47,6 +50,21 @@ class Produto{
         $cmd->bindValue(":nome", $this->nome);
         $cmd->bindValue(":preco", $this->preco);
         return $cmd->execute();
+    }
+
+    // Função para atualizar um produto.
+    public function atualizar($id) : bool  {
+        $sql = "update produtos set nome = :nome, preco = :nome where id = :id";
+         
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":preco", $this->preco);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
+        if($cmd->execute()){
+            $this->id = $id;
+            return true;
+        }
+        return false;
     }
 }
 ?>
