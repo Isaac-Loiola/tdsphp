@@ -66,5 +66,26 @@ class Produto{
         }
         return false;
     }
+
+    // Função para obter um objeto com um id especifico.
+    public function obterPorId($id) : bool{
+        $sql = "delete from produtos where id = :id";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0){
+            $dados = $cmd->fetch();
+
+            $this->id = $dados['id'];
+            $this->nome = $dados['nome'];
+            $this->preco = $dados['preco'];
+            $this->datacad = $dados['datacad'];
+
+            return true;
+        }
+
+        return false;
+    }
 }
 ?>
