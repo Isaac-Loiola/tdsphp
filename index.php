@@ -53,7 +53,7 @@
                 <td><?= date("d/m/Y H:i", strtotime($produto['datacad']))?></td>
                 <td class="d-flex gap-3">
                     <a href="editar.php?id=<?= $produto['id']?>" class="btn btn-warning">Editar</a>    
-                    <a href="?excluir=<?= $produto['id']?>" class="btn btn-danger btn-sm" onclick="return confirm('excluir produto?')">Excluir</a>
+                    <a href="?excluir=<?= $produto['id']?>" class="btn btn-danger btn-sm" onclick="return confirm('excluir produto ?')">Excluir</a>
                 </td>
             </tr>
             <?php endforeach;?> 
