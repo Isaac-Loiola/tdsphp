@@ -37,5 +37,16 @@ class Produto{
     public function getDataCad(){
         return $this->datacad;
     }
+
+    // Função para adicionar um produto ao banco de dados.
+    public function inserir($nome, $preco):bool{
+        $sql = "insert into produtos (nome, preco, datacad)
+        values (:nome, :preco, default)";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":preco", $this->preco);
+        return $cmd->execute();
+    }
 }
 ?>
