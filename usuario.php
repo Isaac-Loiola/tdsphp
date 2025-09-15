@@ -84,7 +84,8 @@ class Usuario{
         return false;
     }
 
-    public function atualizar(){
+    public function atualizar(int $idUpdate){
+        $id = $idUpdate;
         if(!$this->id) return false;
 
         $sql = "update usuarios set nome = :nome, email = :email where id = :id";
@@ -96,7 +97,8 @@ class Usuario{
         return $cmd->execute();
     }
 
-    public function excluir(){
+    public function excluir(int $idDelete){
+        $id = $idDelete;
         if(!$this->id) return false;
 
         $sql = "delete from usuarios where id = :id";
