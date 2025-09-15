@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use function PHPSTORM_META\sql_injection_subst;
+
 include_once "db.php";
 
 // POO com PHP 
@@ -63,7 +66,23 @@ class Usuario{
         return $cmd->fetchAll();
     }
 
-    
+    public function obterPorId(int $id){
+        $sql = "select * from usuarios where id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0 ){
+            $dados = $cmd->fetch();
+
+            $this->id = $dados['id'];
+            $this->nome = $dados['nome'];
+            $this->email = $dados['email'];
+            $this->datacad = $dados['datacad'];
+
+            return true;
+        }
+        return false;
+    }
 }
 
 
